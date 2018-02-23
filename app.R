@@ -28,16 +28,19 @@ ui <- fluidPage(title = "Discrete Probability Distributions",
 
 server <- function(input, output) {
   output$poissonbar1 <- renderPlot({
+     req(input$lam)
      barplot(dpois(seq(0, 3*input$lam,1), input$lam, log=FALSE), 
              names.arg=seq(0, 3*input$lam,1), col="#F3A176", 
              cex.axis=2,cex.lab=2,cex.main=2, cex.names = 2,
-             main=bquote(paste("Poisson, ", lambda, "= ", .(input$lam))))
+             main=bquote(paste("Poisson, ", lambda, " = ", .(input$lam))))
   })
   # output$poissonbar2 <- renderPlot({
   #   barplot(dpois(seq(0, 3*input$lam2,1), input$lam2, log=FALSE), names.arg=seq(0, 3*input$lam2,1), col="#F3A176", 
   #           main=bquote(paste("Poisson, ", lambda, "= ", .(input$lam2))))
   # })
   output$binomplot <- renderPlot({
+    req(input$binomn)
+    req(input$binomp)
     barplot(dbinom(seq(0, input$binomn, 1), input$binomn, input$binomp), 
             names.arg = seq(0, input$binomn, 1),col = "#9999FF", 
             cex.axis=2,cex.lab=2,cex.main=2, cex.names = 2,
